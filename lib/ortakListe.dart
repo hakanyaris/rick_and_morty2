@@ -83,5 +83,7 @@ class _OrtakListeState extends State<OrtakListe> {
       'favoriIdler',
       widget._favorIdler.map((e) => e.toString()).toList(),
     );
+
+    setState(() {});
   }
 }
