@@ -57,13 +57,17 @@ class _AnaSayfaState extends State<AnaSayfa> {
     setState(() {});
   }
 
-  void _favorilerSayfasinaGit() {
+  void _favorilerSayfasinaGit() async{
     MaterialPageRoute pageRoute = MaterialPageRoute(
       builder: (BuildContext context) {
         return Favoriler(_favorIdler, _karakterler);
       },
     );
-    Navigator.push(context, pageRoute);
+   await  Navigator.push(context, pageRoute);
+    // Favoriler sayfasından geri dönüldüğünde orada bir  değişiklik varsa ana sayfada ekran yeniden çizilmesi gerekir.
+    setState(() {
+      
+    });
   }
 }
 

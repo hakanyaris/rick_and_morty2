@@ -70,6 +70,7 @@ class _OrtakListeState extends State<OrtakListe> {
     return widget._favorIdler.contains(widget._karakterler[widget._index].id)
         ? Icon(Icons.favorite)
         : Icon(Icons.favorite_border);
+      
   }
 
   void _favoriListesiniDoldurVeSharedPreferences(Karakter karakter) async {
@@ -83,5 +84,8 @@ class _OrtakListeState extends State<OrtakListe> {
       'favoriIdler',
       widget._favorIdler.map((e) => e.toString()).toList(),
     );
+   setState(() {
+     
+   });
   }
 }

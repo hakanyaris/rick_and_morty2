@@ -9,6 +9,7 @@ class Favoriler extends StatefulWidget {
   Favoriler(this._favoriIdler, this._karakterler);
   @override
   State<Favoriler> createState() => _FavorilerState();
+  
 }
 
 class _FavorilerState extends State<Favoriler> {
@@ -40,7 +41,7 @@ class _FavorilerState extends State<Favoriler> {
         _favoriKarakterler.add(widget._karakterler[a]);
       }
     }
-    // print(widget._favoriIdler);
+    print(widget._favoriIdler);
     setState(() {});
   }
 }
