@@ -6,6 +6,7 @@ import 'package:rick_and_morty2/Favoriler.dart';
 import 'package:rick_and_morty2/karakter.dart';
 import 'package:rick_and_morty2/karakterDetay.dart';
 import 'package:rick_and_morty2/ortakListe.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AnaSayfa extends StatefulWidget {
   @override
@@ -15,13 +16,15 @@ class AnaSayfa extends StatefulWidget {
 class _AnaSayfaState extends State<AnaSayfa> {
   String _api = 'https://rickandmortyapi.com/api/character';
   List<Karakter> _karakterler = [];
-  List<int> _favorIdler = [];
+  List<int> _favoriIdler = [];
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _veriCek();
+      _favoriIdListesiniCihazHazfizasindanCek().then((value) {
+        _veriCek();
+      });
     });
   }
 
@@ -42,7 +45,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
   }
 
   Widget _body() {
-    return Card(child: OrtakListe(_karakterler, _favorIdler));
+    return Card(child: OrtakListe(_karakterler, _favoriIdler));
   }
 
   void _veriCek() async {
@@ -51,8 +54,8 @@ class _AnaSayfaState extends State<AnaSayfa> {
     Map<String, dynamic> _karakterlerJson = jsonDecode(response.body);
     List<dynamic> _karakterList = _karakterlerJson['results'];
     for (var a = 0; a < _karakterList.length; a++) {
-      Karakter _karakterler = Karakter.mapOlustur(_karakterList[a]);
-      this._karakterler.add(_karakterler);
+      Karakter _karakter = Karakter.mapOlustur(_karakterList[a]);
+      this._karakterler.add(_karakter);
     }
     setState(() {});
   }
@@ -60,7 +63,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
   void _favorilerSayfasinaGit() async{
     MaterialPageRoute pageRoute = MaterialPageRoute(
       builder: (BuildContext context) {
-        return Favoriler(_favorIdler, _karakterler);
+        return Favoriler(_favoriIdler, _karakterler);
       },
     );
    await  Navigator.push(context, pageRoute);
@@ -68,6 +71,16 @@ class _AnaSayfaState extends State<AnaSayfa> {
     setState(() {
       
     });
+  }
+
+  Future<void> _favoriIdListesiniCihazHazfizasindanCek() async {
+    SharedPreferences _pref = await SharedPreferences.getInstance();
+
+    List<String> _favoriKarakterIdListesi =
+        _pref.getStringList('favoriIdler') ?? [];
+    _favoriIdler = _favoriKarakterIdListesi.map((m) => int.parse(m)).toList();
+    // print(widget._favoriIdler);
+    setState(() {});
   }
 }
 

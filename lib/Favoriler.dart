@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty2/karakter.dart';
 import 'package:rick_and_morty2/ortakListe.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Favoriler extends StatefulWidget {
   List<int> _favoriIdler;
@@ -17,9 +18,7 @@ class _FavorilerState extends State<Favoriler> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      favoriKarakterListesiniDoldur();
-    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {});
   }
 
   @override
@@ -34,6 +33,7 @@ class _FavorilerState extends State<Favoriler> {
   Widget _body() {
     return Card(child: OrtakListe(_favoriKarakterler, widget._favoriIdler));
   }
+<<<<<<< HEAD
 
   void favoriKarakterListesiniDoldur() {
     for (int a = 0; a < widget._karakterler.length; a++) {
@@ -44,4 +44,6 @@ class _FavorilerState extends State<Favoriler> {
     print(widget._favoriIdler);
     setState(() {});
   }
+=======
+>>>>>>> a314f55749f50c4cef2cd4cefeafbab51e4a26e1
 }
