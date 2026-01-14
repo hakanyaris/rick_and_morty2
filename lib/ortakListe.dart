@@ -24,7 +24,7 @@ class _OrtakListeState extends State<OrtakListe> {
 
   Widget _buildItemBuilder(BuildContext context, int index) {
     Karakter karakter = widget._karakterler[index];
-    widget._index = index;
+    widget._index = index;// favoriIconAta metodunda indexe ihtiyacı olduğu için tanımladık
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListTile(
@@ -65,7 +65,7 @@ class _OrtakListeState extends State<OrtakListe> {
     );
     Navigator.push(context, pageRoute);
   }
-
+// 
   Widget favoriIconAta() {
     return widget._favorIdler.contains(widget._karakterler[widget._index].id)
         ? Icon(Icons.favorite)
